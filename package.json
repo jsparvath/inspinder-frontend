@@ -1,0 +1,24 @@
+{
+	"name": "v3-inspinder-frontend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "next -p 8989",
+		"build": "next build",
+		"start": "next start"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@material-ui/core": "^3.9.0",
+		"@material-ui/icons": "^3.0.2",
+		"jss": "^9.8.7",
+		"next": "^7.0.2",
+		"prop-types": "^15.6.2",
+		"react": "^16.7.0",
+		"react-dom": "^16.7.0",
+		"react-jss": "^8.6.1"
+	}
+}
