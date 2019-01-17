@@ -8,6 +8,7 @@ const RequireSignin = (props) => (
 			if (!me) {
 				if (process.browser) {
 					Router.push('/');
+					return null;
 				}
 				return null;
 			}
