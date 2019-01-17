@@ -15,6 +15,9 @@ const theme = createMuiTheme({
 	},
 	typography: {
 		useNextVariants: true
+	},
+	postList: {
+		masonryGap: 10
 	}
 });
 

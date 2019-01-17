@@ -9,38 +9,46 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
-
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
+import User from '../src/components/user/User';
+import LandingPage from '../src/components/landing/LandingPage';
+import PostList from '../src/components/post/PostList';
+const styles = (theme) => ({
+	root: {
+		textAlign: 'center',
+		paddingTop: theme.spacing.unit * 20
+	}
 });
 
 class Index extends React.Component {
-  state = {
-    open: false,
-  };
+	state = {
+		open: false
+	};
 
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
+	handleClose = () => {
+		this.setState({
+			open: false
+		});
+	};
 
-  handleClick = () => {
-    this.setState({
-      open: true,
-    });
-  };
+	handleClick = () => {
+		this.setState({
+			open: true
+		});
+	};
 
-  render() {
-    const { classes } = this.props;
-    const { open } = this.state;
+	render() {
+		const { classes } = this.props;
+		const { open } = this.state;
 
-    return (
-      <div className={classes.root}>
-        <Dialog open={open} onClose={this.handleClose}>
+		return (
+			<div className={classes.root}>
+				<User>
+					{({ data: { me } }) => {
+						if (!me) return <LandingPage />;
+						return <PostList />;
+					}}
+				</User>
+				{/* <Dialog open={open} onClose={this.handleClose}>
           <DialogTitle>Super Secret Password</DialogTitle>
           <DialogContent>
             <DialogContentText>1-2-3-4-5</DialogContentText>
@@ -64,14 +72,14 @@ class Index extends React.Component {
         </Typography>
         <Button variant="contained" color="secondary" onClick={this.handleClick}>
           Super Secret Password
-        </Button>
-      </div>
-    );
-  }
+        </Button> */}
+			</div>
+		);
+	}
 }
 
 Index.propTypes = {
-  classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Index);

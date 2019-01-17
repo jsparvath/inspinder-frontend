@@ -41,7 +41,7 @@ const styles = (theme) => ({
 class Login extends Component {
 	state = {
 		password: 'yoyo',
-		email: ''
+		email: 'mymy'
 	};
 
 	saveToState = (e) => {
@@ -65,7 +65,14 @@ class Login extends Component {
 								<Typography component="h1" variant="h5">
 									Login
 								</Typography>
-								<form className={classes.form} method="post" onSubmit={async (e) => {}}>
+								<form
+									className={classes.form}
+									method="post"
+									onSubmit={async (e) => {
+										e.preventDefault();
+										await login();
+									}}
+								>
 									<FormControl margin="normal" required fullWidth>
 										<InputLabel htmlFor="email">Email Address</InputLabel>
 										<Input
