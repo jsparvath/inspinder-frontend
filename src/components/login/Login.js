@@ -1,15 +1,10 @@
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
 import React, { Component } from 'react';
+import { Button, Avatar, FormControl, Input, InputLabel, Paper, Typography } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Mutation } from 'react-apollo';
+import { LOGIN_MUTATION } from '../../queries/LoginMutations';
+import { CURRENT_USER_QUERY } from '../../queries/UserQueries';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = (theme) => ({
 	main: {
@@ -43,10 +38,9 @@ const styles = (theme) => ({
 	}
 });
 
-class Signup extends Component {
+class Login extends Component {
 	state = {
-		name: '',
-		password: '',
+		password: 'yoyo',
 		email: ''
 	};
 
@@ -56,39 +50,62 @@ class Signup extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<main className={classes.main}>
-				<Paper className={classes.paper}>
-					<Avatar className={classes.avatar}>
-						<LockOutlinedIcon />
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Sign up
-					</Typography>
-					<form className={classes.form} method="post" onSubmit={async (e) => {}}>
-						<FormControl margin="normal" required fullWidth>
-							<InputLabel htmlFor="email">Email Address</InputLabel>
-							<Input id="email" name="email" autoComplete="email" autoFocus />
-						</FormControl>
-						<FormControl margin="normal" required fullWidth>
-							<InputLabel htmlFor="name">Name</InputLabel>
-							<Input name="name" id="name" />
-						</FormControl>
-						<FormControl margin="normal" required fullWidth>
-							<InputLabel htmlFor="password">Password</InputLabel>
-							<Input name="password" type="password" id="password" autoComplete="current-password" />
-						</FormControl>
+			<Mutation
+				mutation={LOGIN_MUTATION}
+				variables={this.state}
+				refetchQueries={[ { query: CURRENT_USER_QUERY } ]}
+			>
+				{(login, { error, loading }) => {
+					return (
+						<main className={classes.main}>
+							<Paper className={classes.paper}>
+								<Avatar className={classes.avatar}>
+									<LockOutlinedIcon />
+								</Avatar>
+								<Typography component="h1" variant="h5">
+									Login
+								</Typography>
+								<form className={classes.form} method="post" onSubmit={async (e) => {}}>
+									<FormControl margin="normal" required fullWidth>
+										<InputLabel htmlFor="email">Email Address</InputLabel>
+										<Input
+											id="email"
+											name="email"
+											value={this.state.email}
+											onChange={this.saveToState}
+											autoComplete="email"
+											autoFocus
+										/>
+									</FormControl>
+									<FormControl margin="normal" required fullWidth>
+										<InputLabel htmlFor="password">Password</InputLabel>
+										<Input
+											name="password"
+											type="password"
+											id="password"
+											value={this.state.password}
+											onChange={this.saveToState}
+											autoComplete="current-password"
+										/>
+									</FormControl>
 
-						{/* value={this.state.password}
-									onChange={this.saveToState} */}
-
-						<Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-							Sign in
-						</Button>
-					</form>
-				</Paper>
-			</main>
+									<Button
+										type="submit"
+										fullWidth
+										variant="contained"
+										color="primary"
+										className={classes.submit}
+									>
+										Login
+									</Button>
+								</form>
+							</Paper>
+						</main>
+					);
+				}}
+			</Mutation>
 		);
 	}
 }
 
-export default withStyles(styles)(Signup);
+export default withStyles(styles)(Login);
