@@ -1,4 +1,4 @@
-import { Avatar, AppBar, Toolbar } from '@material-ui/core';
+import { Avatar, AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { AddCircle } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import User from '../user/User';
@@ -9,12 +9,15 @@ const styles = (theme) => ({
 	avatar: {
 		backgroundColor: theme.palette.primary.light
 	},
-	toolbar: { display: 'flex', padding: '0 2em', justifyContent: 'space-between' }
+	toolbar: { display: 'flex', padding: '0 2em', justifyContent: 'space-between' },
+	iconButton: { position: 'relative', left: -15 }
 });
 const Header = ({ classes }) => (
 	<AppBar position="static" className={classes.appBar}>
 		<Toolbar className={classes.toolbar}>
-			<AddCircle color="secondary" className={classes.createButton} />
+			<IconButton className={classes.iconButton} aria-label="create post">
+				<AddCircle color="secondary" className={classes.createButton} />
+			</IconButton>
 			<User>
 				{({ data: { me } }) => {
 					console.log(me);

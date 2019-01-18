@@ -9,7 +9,16 @@ const PostList = (props) => (
 		{({ data, error, loading }) => (
 			<Masonry brakePoints={brakePoints}>
 				{data.posts.map((post) => {
-					return <Post key={post.id} image={post.image} thumbnailType="img" />;
+					return (
+						<Post
+							key={post.id}
+							image={post.image}
+							title={post.title}
+							link={post.link}
+							description={post.description}
+							thumbnailType="img"
+						/>
+					);
 				})}
 			</Masonry>
 			// {/* This is post list

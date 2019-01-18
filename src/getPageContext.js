@@ -18,6 +18,9 @@ const theme = createMuiTheme({
 	},
 	postList: {
 		masonryGap: 10
+	},
+	customColors: {
+		iconPrimary: '#fefefe'
 	}
 });
 
