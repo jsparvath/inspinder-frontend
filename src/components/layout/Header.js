@@ -20,7 +20,6 @@ const Header = ({ classes }) => (
 			</IconButton>
 			<User>
 				{({ data: { me } }) => {
-					console.log(me);
 					return me && <Avatar className={classes.avatar}>{me.name[0].toUpperCase()}</Avatar>;
 				}}
 			</User>

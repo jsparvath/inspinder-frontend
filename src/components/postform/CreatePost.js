@@ -35,10 +35,6 @@ class PostForm extends React.Component {
 	}
 
 	handleChange = (name) => (e) => {
-		console.log(e.target);
-		console.log(e);
-		console.log(e.target.value);
-		console.log(e.target.name);
 		const { value } = e.target;
 		this.setState({
 			formState: {
