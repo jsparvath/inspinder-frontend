@@ -16,6 +16,7 @@ class MyApp extends App {
 		this.pageContext = getPageContext();
 	}
 	static async getInitialProps({ Component, router, ctx }) {
+		console.log('before pagesprops');
 		let pageProps = {};
 		const c = cookies(ctx);
 
@@ -23,6 +24,8 @@ class MyApp extends App {
 			pageProps = await Component.getInitialProps(ctx);
 		}
 		pageProps.query = ctx.query;
+		console.log('pageProps');
+		console.log(pageProps);
 
 		return { pageProps };
 	}
