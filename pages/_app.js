@@ -32,6 +32,7 @@ class MyApp extends App {
 		} else {
 			console.log('pageProps good status');
 		}
+		pageProps = {};
 		return { pageProps };
 	}
 	componentDidMount() {
