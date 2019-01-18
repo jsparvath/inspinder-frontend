@@ -3,13 +3,15 @@ import { Query } from 'react-apollo';
 import { GET_TAGS_QUERY } from '../../queries/TagQueries';
 
 import { TextField } from '@material-ui/core';
-
+import { withStyles } from '@material-ui/core/styles';
 import Dropzone from 'react-dropzone';
+import ReactSelect from '../ui/ReactSelect';
 // import imageCompression from 'browser-image-compression';
 
 import Creatable from 'react-select/lib/Creatable';
 import Animated from 'react-select/lib/animated';
 
+const styles = (theme) => ({});
 class PostForm extends React.Component {
 	state = {
 		isLoading: this.props.loading,
@@ -32,8 +34,12 @@ class PostForm extends React.Component {
 		}
 	}
 
-	handleChange = (e) => {
-		const { value, name } = e.target;
+	handleChange = (name) => (e) => {
+		console.log(e.target);
+		console.log(e);
+		console.log(e.target.value);
+		console.log(e.target.name);
+		const { value } = e.target;
 		this.setState({
 			formState: {
 				...this.state.formState,
@@ -72,6 +78,7 @@ class PostForm extends React.Component {
 	};
 
 	render() {
+		const { classes } = this.props;
 		const { title, description, link, image } = this.state.formState;
 		return (
 			<React.Fragment>
@@ -101,22 +108,37 @@ class PostForm extends React.Component {
 							{/* </Dropzone> */}
 							<div>
 								<div>
-									<label for="title">Title:</label>
-									<input name="title" type="text" value={title} onChange={this.handleChange} />
+									{/* <lab  el for="title">Title:</label> */}
+									{/* <input name="title" type="text" value={title} onChange={this.handleChange} /> */}
+									<TextField
+										label="title"
+										className={classes.textField}
+										value={title}
+										// variant="outlined"
+										onChange={this.handleChange('title')}
+									/>
 								</div>
 
 								<div>
-									<label for="link">Link:</label>
-									<input
+									{/* <label for="link">Link:</label> */}
+									<TextField
+										label="link"
+										// placeholder="Link:"
+										className={classes.textField}
+										value={link}
+										// variant="outlined"
+										onChange={this.handleChange('link')}
+									/>
+									{/* <input
 										name="link"
 										id="link"
 										type="text"
 										value={link}
 										onChange={this.handleChange}
-									/>
+									/> */}
 								</div>
 
-								<label>
+								{/* <label>
 									Tags:
 									<Query query={GET_TAGS_QUERY}>
 										{({ data, error, loading }) => {
@@ -139,18 +161,43 @@ class PostForm extends React.Component {
 											);
 										}}
 									</Query>
-								</label>
+								</label> */}
+								<ReactSelect isMulti animated={Animated()} components={Animated()} />
 
+								{/* <Select
+						classes={classes}
+						styles={selectStyles}
+						textFieldProps={{
+							label: 'tags'
+							// InputLabelProps: {
+							// 	shrink: true
+							// }
+						}}
+						options={suggestions}
+						components={components}
+						value={this.state.multi}
+						onChange={this.handleChange('multi')}
+						placeholder={() => undefined}
+						// label="yo"
+						isMulti
+					/> */}
 								{/* <input type="submit" value="Submit" /> */}
 							</div>
 							<div>
-								<label for="description">description:</label>
+								{/* <label for="description">description:</label>
 								<textarea
 									id="description"
 									name="description"
 									type="text"
 									value={description}
 									onChange={this.handleChange}
+								/> */}
+								<TextField
+									label="description"
+									multiline
+									value={description}
+									onChange={this.handleChange('description')}
+									variant="outlined"
 								/>
 							</div>
 							<div>
@@ -164,4 +211,4 @@ class PostForm extends React.Component {
 	}
 }
 
-export default PostForm;
+export default withStyles(styles)(PostForm);
