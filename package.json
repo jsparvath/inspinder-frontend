@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "next -p 8989",
-		"build": "next build",
-		"start": "next start -p $PORT",
+		"build": "NODE_ENV=development next build",
+		"start": "NODE_ENV=development next start -p $PORT",
 		"heroku-postbuild": "npm run build"
 	},
 	"keywords": [],
