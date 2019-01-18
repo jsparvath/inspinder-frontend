@@ -24,15 +24,6 @@ class MyApp extends App {
 			pageProps = await Component.getInitialProps(ctx);
 		}
 		pageProps.query = ctx.query;
-		console.log('pageProps');
-		console.log(pageProps);
-		if (pageProps.statusCode == 404) {
-			console.log('pageprops bad status');
-			pageProps = {};
-		} else {
-			console.log('pageProps good status');
-		}
-		pageProps = {};
 		return { pageProps };
 	}
 	componentDidMount() {
