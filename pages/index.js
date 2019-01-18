@@ -42,12 +42,13 @@ class Index extends React.Component {
 
 		return (
 			<div className={classes.root}>
-				<User>
+				yo
+				{/* <User>
 					{({ data: { me } }) => {
 						if (!me) return <LandingPage />;
 						return <PostList />;
 					}}
-				</User>
+				</User> */}
 				{/* <Dialog open={open} onClose={this.handleClose}>
           <DialogTitle>Super Secret Password</DialogTitle>
           <DialogContent>
