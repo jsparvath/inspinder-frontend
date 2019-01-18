@@ -26,7 +26,12 @@ class MyApp extends App {
 		pageProps.query = ctx.query;
 		console.log('pageProps');
 		console.log(pageProps);
-
+		if (pageProps.statusCode == 404) {
+			console.log('pageprops bad status');
+			pageProps = {};
+		} else {
+			console.log('pageProps good status');
+		}
 		return { pageProps };
 	}
 	componentDidMount() {
