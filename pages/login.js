@@ -4,14 +4,14 @@ import User from '../src/components/user/User';
 import Router from 'next/router';
 const login = (props) => (
 	<User>
-		{({ data: { me }, loading, error }) => {
+		{({ data, loading, error }) => {
 			{
 				if (loading) return <p>Loading!</p>;
 			}
 			{
 				if (error) return <p>Error!</p>;
 			}
-			if (!me) {
+			if (!data.me) {
 				return (
 					<React.Fragment>
 						<Login />

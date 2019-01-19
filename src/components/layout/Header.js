@@ -20,12 +20,8 @@ const Header = ({ classes }) => (
 			</IconButton>
 			<User>
 				{({ data: { me }, loading, error }) => {
-					{
-						if (loading) return <p>Loading!</p>;
-					}
-					{
-						if (error) return <p>Error!</p>;
-					}
+					if (loading) return null;
+					if (error) return null;
 					return me && <Avatar className={classes.avatar}>{me.name[0].toUpperCase()}</Avatar>;
 				}}
 			</User>

@@ -43,10 +43,10 @@ class Index extends React.Component {
 		return (
 			<div className={classes.root}>
 				<User>
-					{({ data: { me }, loading, error }) => {
-            {if(loading) return <p>Loading</p>}
-            {if(error) return <p>Error</p>}
-						if (!me) return <LandingPage />;
+					{({ data, loading, error }) => {
+						if (loading) return <p>Loading</p>;
+						if (error) return <p>Error</p>;
+						if (!data.me) return <LandingPage />;
 						return <PostList />;
 					}}
 				</User>
