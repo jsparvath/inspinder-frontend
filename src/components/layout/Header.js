@@ -19,7 +19,13 @@ const Header = ({ classes }) => (
 				<AddCircle color="secondary" className={classes.createButton} />
 			</IconButton>
 			<User>
-				{({ data: { me } }) => {
+				{({ data: { me }, loading, error }) => {
+					{
+						if (loading) return <p>Loading!</p>;
+					}
+					{
+						if (error) return <p>Error!</p>;
+					}
 					return me && <Avatar className={classes.avatar}>{me.name[0].toUpperCase()}</Avatar>;
 				}}
 			</User>

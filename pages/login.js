@@ -4,7 +4,13 @@ import User from '../src/components/user/User';
 import Router from 'next/router';
 const login = (props) => (
 	<User>
-		{({ data: { me } }) => {
+		{({ data: { me }, loading, error }) => {
+			{
+				if (loading) return <p>Loading!</p>;
+			}
+			{
+				if (error) return <p>Error!</p>;
+			}
 			if (!me) {
 				return (
 					<React.Fragment>
@@ -15,6 +21,7 @@ const login = (props) => (
 			} else {
 				if (process.browser) {
 					Router.push('/');
+					return null;
 				} else {
 					return null;
 				}

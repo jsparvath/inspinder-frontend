@@ -56,6 +56,8 @@ class Login extends Component {
 				refetchQueries={[ { query: CURRENT_USER_QUERY } ]}
 			>
 				{(login, { error, loading }) => {
+					if (loading) return <p>loading</p>;
+					if (error) return <p>Error</p>;
 					return (
 						<main className={classes.main}>
 							<Paper className={classes.paper}>
