@@ -15,6 +15,7 @@ const PostList = (props) => (
 						return (
 							<Post
 								key={post.id}
+								postId={post.id}
 								image={post.image}
 								title={post.title}
 								link={post.link}

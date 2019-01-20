@@ -7,8 +7,14 @@ import withApollo from '../lib/withApollo';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
+import nested from 'jss-plugin-nested';
+import preset from 'jss-preset-default';
+import { create } from 'jss';
 import getPageContext from '../src/getPageContext';
 import Layout from '../src/components/layout/Layout';
+
+// const jss = create(preset());
+// jss.use(nested());
 
 class MyApp extends App {
 	constructor() {
@@ -16,7 +22,6 @@ class MyApp extends App {
 		this.pageContext = getPageContext();
 	}
 	static async getInitialProps({ Component, router, ctx }) {
-		console.log('before pagesprops');
 		let pageProps = {};
 		const c = cookies(ctx);
 
@@ -43,6 +48,7 @@ class MyApp extends App {
 				</Head>
 				{/* Wrap every page in Jss and Theme providers */}
 				<JssProvider
+					// jss={jss}
 					registry={this.pageContext.sheetsRegistry}
 					generateClassName={this.pageContext.generateClassName}
 				>

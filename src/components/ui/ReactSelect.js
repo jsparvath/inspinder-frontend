@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select from 'react-select';
+import CreatableSelect from 'react-select/lib/Creatable';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -202,7 +203,7 @@ const components = {
 	ValueContainer
 };
 
-class IntegrationReactSelect extends React.Component {
+class ReactSelect extends React.Component {
 	state = {
 		single: null,
 		multi: null
@@ -229,44 +230,78 @@ class IntegrationReactSelect extends React.Component {
 
 		return (
 			<div className={classes.root}>
-				<NoSsr>
-					{/* <Select
-						classes={classes}
-						styles={selectStyles}
-						options={suggestions}
-						components={components}
-						value={this.state.single}
-						onChange={this.handleChange('single')}
-						placeholder="Search a country (start with a)"
-						isClearable
-					/> */}
-					{/* <div className={classes.divider} /> */}
-					<Select
-						classes={classes}
-						styles={selectStyles}
-						textFieldProps={{
-							label: 'tags'
-							// InputLabelProps: {
-							// 	shrink: true
-							// }
-						}}
-						options={suggestions}
-						components={components}
-						value={this.state.multi}
-						onChange={this.handleChange('multi')}
-						placeholder={() => undefined}
-						// label="yo"
-						isMulti={this.props.isMulti}
-					/>
-				</NoSsr>
+				{/* <NoSsr> */}
+				<Select
+					classes={classes}
+					styles={selectStyles}
+					textFieldProps={{
+						label: 'tags'
+					}}
+					options={suggestions}
+					components={components}
+					value={this.state.multi}
+					onChange={this.handleChange('multi')}
+					placeholder={() => undefined}
+					isMulti={this.props.isMulti}
+				/>
+				{/* </NoSsr> */}
 			</div>
 		);
 	}
 }
 
-IntegrationReactSelect.propTypes = {
-	classes: PropTypes.object.isRequired,
-	theme: PropTypes.object.isRequired
-};
+class ReactCreatable extends React.Component {
+	state = {
+		single: null,
+		multi: null
+	};
 
-export default withStyles(styles, { withTheme: true })(IntegrationReactSelect);
+	handleChange = (name) => (value) => {
+		this.setState({
+			[name]: value
+		});
+	};
+
+	render() {
+		const { classes, theme } = this.props;
+
+		const selectStyles = {
+			input: (base) => ({
+				...base,
+				color: theme.palette.text.primary,
+				'& input': {
+					font: 'inherit'
+				}
+			})
+		};
+
+		return (
+			<div className={classes.root}>
+				{/* <NoSsr> */}
+				<CreatableSelect
+					classes={classes}
+					styles={selectStyles}
+					textFieldProps={{
+						label: 'tags'
+					}}
+					onChange={this.props.onChange}
+					options={this.props.options}
+					components={components}
+					value={this.props.value}
+					// onChange={this.handleChange('multi')}
+					placeholder={() => undefined}
+					isMulti={this.props.isMulti}
+				/>
+				{/* </NoSsr> */}
+			</div>
+		);
+	}
+}
+
+// ReactSelect.propTypes = {
+// classes: PropTypes.object.isRequired,
+// theme: PropTypes.object.isRequired
+// };
+const RS = withStyles(styles, { withTheme: true })(ReactSelect);
+const RC = withStyles(styles, { withTheme: true })(ReactCreatable);
+export { RS as ReactSelect, RC as ReactCreatable };

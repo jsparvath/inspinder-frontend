@@ -15,7 +15,7 @@ import PostList from '../src/components/post/PostList';
 const styles = (theme) => ({
 	root: {
 		textAlign: 'center',
-		paddingTop: theme.spacing.unit * 20
+		paddingTop: theme.spacing.unit * 15
 	}
 });
 
