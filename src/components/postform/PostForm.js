@@ -92,10 +92,10 @@ class PostForm extends React.Component {
 	};
 
 	handleChangeTag = (tags, actionMeta) => {
-		console.log('changing tag');
 		this.setState({
 			tagsHaveChanged: true,
 			formState: {
+				...this.state.formState,
 				tags: tags.map((tag) => tag.value)
 			}
 		});

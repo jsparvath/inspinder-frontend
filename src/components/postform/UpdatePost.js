@@ -31,9 +31,6 @@ class UpdatePostContainer extends React.Component {
 												formState.image = imageFile.secure_url;
 											}
 										}
-										console.log('formState');
-										console.log(formState);
-
 										const res = await updatePost({
 											variables: {
 												id: id,

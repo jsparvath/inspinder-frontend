@@ -5,7 +5,7 @@ import Router from 'next/router';
 const RequireSignin = (props) => (
 	<Query query={CURRENT_USER_QUERY}>
 		{({ data, loading, error }) => {
-			if (loading) null;
+			// if (loading) null;
 			if (error) null;
 			if (!data.me) {
 				if (process.browser) {

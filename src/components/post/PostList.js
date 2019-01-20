@@ -8,7 +8,9 @@ const PostList = (props) => (
 	<Query query={GET_POSTS_QUERY}>
 		{({ data, error, loading }) => {
 			if (error) return <p>Error</p>;
-			if (loading) return <p>Loading</p>;
+			// if (loading) return <p>Loading</p>;
+			//TODO the schema in the  server should specify an empty list if no posts are availabel
+			if (!data.posts) return null;
 			return (
 				<Masonry brakePoints={brakePoints}>
 					{data.posts.map((post) => {

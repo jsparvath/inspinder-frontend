@@ -106,7 +106,7 @@ const styles = (theme) => ({
 function NoOptionsMessage(props) {
 	return (
 		<Typography color="textSecondary" className={props.selectProps.classes.noOptionsMessage} {...props.innerProps}>
-			{props.children}
+			<span>{props.children}</span>
 		</Typography>
 	);
 }
@@ -153,7 +153,7 @@ function Option(props) {
 function Placeholder(props) {
 	return (
 		<Typography color="textSecondary" className={props.selectProps.classes.placeholder} {...props.innerProps}>
-			{props.children}
+			<span>{props.children()}</span>
 		</Typography>
 	);
 }
@@ -161,7 +161,7 @@ function Placeholder(props) {
 function SingleValue(props) {
 	return (
 		<Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
-			{props.children}
+			<span>{props.children}</span>
 		</Typography>
 	);
 }
@@ -206,7 +206,7 @@ const components = {
 class ReactSelect extends React.Component {
 	state = {
 		single: null,
-		multi: null
+		multi: []
 	};
 
 	handleChange = (name) => (value) => {

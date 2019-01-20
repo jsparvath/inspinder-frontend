@@ -40,8 +40,8 @@ const styles = (theme) => ({
 
 class Login extends Component {
 	state = {
-		password: 'yoyo',
-		email: 'mymy'
+		password: '',
+		email: ''
 	};
 
 	saveToState = (e) => {
@@ -56,7 +56,7 @@ class Login extends Component {
 				refetchQueries={[ { query: CURRENT_USER_QUERY } ]}
 			>
 				{(login, { error, loading }) => {
-					if (loading) return <p>loading</p>;
+					// if (loading) return <p>loading</p>;
 					if (error) return <p>Error</p>;
 					return (
 						<main className={classes.main}>

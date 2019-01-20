@@ -19,6 +19,21 @@ class MyDocument extends Document {
 					{/* PWA primary color */}
 					<meta name="theme-color" content={pageContext ? pageContext.theme.palette.primary.main : null} />
 					<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+					<style>
+						{`
+					
+						html {
+							box-sizing: border-box;
+						}
+						body {
+							padding: 0;
+							margin: 0;
+							// background-color: blue;
+							overflow-x: hidden;
+							padding-bottom: 100px;
+						}
+					`}
+					</style>
 				</Head>
 				<body>
 					<Main />
