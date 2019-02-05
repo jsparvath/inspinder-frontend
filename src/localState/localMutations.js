@@ -11,4 +11,10 @@ const TOGGLE_SIGNUP = gql`
 		toggleSignup(signupIsOpen: $signupIsOpen) @client
 	}
 `;
-export { TOGGLE_LOGIN, TOGGLE_SIGNUP };
+
+const CHANGE_TAGS = gql`
+	mutation changeTags($tags: [String!]!) {
+		changeTags(tags: $tags) @client
+	}
+`;
+export { TOGGLE_LOGIN, TOGGLE_SIGNUP, CHANGE_TAGS };

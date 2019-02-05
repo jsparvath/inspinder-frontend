@@ -10,11 +10,12 @@ const styles = (theme) => ({
 		margin: 'auto'
 	},
 	masonryRow: {
-		margin: '0 ' + theme.postList.masonryGap + 'px'
+		margin: '0 ' + theme.postList.masonryGap + 'px',
+		width: theme.postList.masonryItemWidth + 'px'
 	},
 	item: {
-		marginBottom: 2 * theme.postList.masonryGap,
-		width: '250'
+		marginBottom: 2 * theme.postList.masonryGap
+		// width: '240px'
 	}
 });
 

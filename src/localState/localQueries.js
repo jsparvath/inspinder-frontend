@@ -8,4 +8,12 @@ const GET_TOGGLE_LOGIN = gql`
 		}
 	}
 `;
-export { GET_TOGGLE_LOGIN };
+
+const ACTIVE_TAGS_LQUERY = gql`
+	{
+		activeTags @client {
+			tags
+		}
+	}
+`;
+export { GET_TOGGLE_LOGIN, ACTIVE_TAGS_LQUERY };

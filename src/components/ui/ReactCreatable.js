@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Select from 'react-select';
+import CreatableSelect from 'react-select/lib/Creatable';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
@@ -17,19 +17,11 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 const styles = (theme) => ({
 	root: {
 		flexGrow: 1,
-		'& label': {
-			color: theme.palette.primary.contrastText + ' !important'
-		}
+		// height:
 	},
 	input: {
 		display: 'flex',
-		padding: 0,
-		border: 'none',
-		boxShadow: 'none',
-		'&:hover': {
-			border: 'none',
-			boxShadow: 'none'
-		}
+		padding: 0
 	},
 	valueContainer: {
 		display: 'flex',
@@ -67,9 +59,6 @@ const styles = (theme) => ({
 	},
 	divider: {
 		height: theme.spacing.unit * 2
-	},
-	inputText: {
-		background: 'yellow'
 	}
 });
 
@@ -93,7 +82,6 @@ function Control(props) {
 			InputProps={{
 				inputComponent,
 				inputProps: {
-					// className: props.selectProps.classes.input,
 					className: props.selectProps.classes.input,
 					inputRef: props.innerRef,
 					children: props.children,
@@ -175,17 +163,17 @@ const components = {
 	ClearIndicator: () => null
 };
 
-class ReactSelect extends React.Component {
+class ReactCreatable extends React.Component {
 	state = {
 		single: null,
-		multi: []
+		multi: null
 	};
 
-	// handleChange = (name) => (value) => {
-	// 	this.setState({
-	// 		[name]: value
-	// 	});
-	// };
+	handleChange = (name) => (value) => {
+		this.setState({
+			[name]: value
+		});
+	};
 
 	render() {
 		const { classes, theme } = this.props;
@@ -193,8 +181,7 @@ class ReactSelect extends React.Component {
 		const selectStyles = {
 			input: (base) => ({
 				...base,
-				color: theme.palette.primary.contrastText,
-				// boxShadow: 'none',
+				color: theme.palette.text.primary,
 				'& input': {
 					font: 'inherit'
 				}
@@ -204,7 +191,7 @@ class ReactSelect extends React.Component {
 		return (
 			<div className={classes.root}>
 				{/* <NoSsr> */}
-				<Select
+				<CreatableSelect
 					classes={classes}
 					styles={selectStyles}
 					textFieldProps={{
@@ -212,7 +199,6 @@ class ReactSelect extends React.Component {
 					}}
 					components={components}
 					placeholder={() => undefined}
-					isClearable="false"
 					value={this.props.value}
 					onChange={this.props.onChange}
 					options={this.props.options}
@@ -224,5 +210,5 @@ class ReactSelect extends React.Component {
 	}
 }
 
-const RS = withStyles(styles, { withTheme: true })(ReactSelect);
-export { RS as ReactSelect };
+const RC = withStyles(styles, { withTheme: true })(ReactCreatable);
+export { RS as ReactSelect, RC as ReactCreatable };

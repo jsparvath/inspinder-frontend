@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Dropzone from 'react-dropzone';
 import imageCompression from 'browser-image-compression';
 
-import { ReactCreatable } from '../ui/ReactSelect';
+import { ReactCreatable } from '../ui/ReactCreatable';
 import Animated from 'react-select/lib/animated';
 
 const styles = (theme) => ({

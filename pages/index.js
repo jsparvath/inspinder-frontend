@@ -1,14 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Link from 'next/link';
 import User from '../src/components/user/User';
 import LandingPage from '../src/components/landing/LandingPage';
 import PostList from '../src/components/post/PostList';
@@ -44,37 +36,12 @@ class Index extends React.Component {
 			<div className={classes.root}>
 				<User>
 					{({ data, loading, error }) => {
-						// if (loading) return <p>Loading</p>;
 						if (error) return <p>Error</p>;
 						if (!data.me) return <LandingPage />;
+
 						return <PostList />;
 					}}
 				</User>
-				{/* <Dialog open={open} onClose={this.handleClose}>
-          <DialogTitle>Super Secret Password</DialogTitle>
-          <DialogContent>
-            <DialogContentText>1-2-3-4-5</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={this.handleClose}>
-              OK
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Typography variant="h4" gutterBottom>
-          Material-UI
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          example project
-        </Typography>
-        <Typography gutterBottom>
-          <Link href="/about">
-            <a>Go to the about page</a>
-          </Link>
-        </Typography>
-        <Button variant="contained" color="secondary" onClick={this.handleClick}>
-          Super Secret Password
-        </Button> */}
 			</div>
 		);
 	}

@@ -5,9 +5,12 @@ import { withStyles } from '@material-ui/core/styles';
 import User from '../user/User';
 import Link from 'next/link';
 import { withRouter } from 'next/router';
-import { TOGGLE_LOGIN } from '../../localState/localMutations';
-import { Mutation } from 'react-apollo';
+import { TOGGLE_LOGIN, CHANGE_TAGS } from '../../localState/localMutations';
+import { Mutation, Query } from 'react-apollo';
+import { GET_TAGS_QUERY } from '../../queries/TagQueries';
 import { ApolloConsumer } from 'react-apollo';
+
+import { ReactSelect } from '../ui/ReactSelect';
 
 const styles = (theme) => ({
 	appBar: {},
@@ -19,6 +22,10 @@ const styles = (theme) => ({
 	iconButton: { position: 'relative', left: -15 },
 	loginButtons: {
 		marginLeft: 'auto'
+	},
+	selectField: {
+		width: '50%'
+		// background: 'blue'
 	}
 });
 
@@ -52,6 +59,51 @@ function getBackToPosts({ path, classes }) {
 		return null;
 	}
 }
+class Select extends React.Component {
+	state = {
+		tags: []
+	};
+
+	render() {
+		return (
+			<Mutation mutation={CHANGE_TAGS}>
+				{(changeTags) => {
+					return (
+						<ReactSelect
+							// className={this.props.className}
+							isMulti
+							// styles={selectStyles}
+							onChange={(tags) => {
+								this.setState({
+									tags
+								});
+								changeTags({ variables: { tags: tags.map((tag) => tag.id) } });
+							}}
+							value={this.state.tags}
+							options={this.props.options}
+						/>
+					);
+				}}
+			</Mutation>
+		);
+	}
+}
+function getSelectByTags({ path, classes }) {
+	if (path && (path === '/' || path === '')) {
+		return (
+			<Query query={GET_TAGS_QUERY}>
+				{({ data, error, loading }) => {
+					const tags = data.tags.map((tag) => ({ ...tag, label: tag.name, value: tag.name }));
+					return (
+						<div className={classes.selectField}>
+							<Select options={tags} />
+						</div>
+					);
+				}}
+			</Query>
+		);
+	} else return null;
+}
 const Header = (props) => {
 	const { classes } = props;
 	const path = props.router.asPath;
@@ -68,6 +120,7 @@ const Header = (props) => {
 								<React.Fragment>
 									{getCreate({ path, classes })}
 									{getBackToPosts({ path, classes })}
+									{getSelectByTags({ path, classes })}
 									<Avatar className={classes.avatar}>
 										{(me.name[0] && me.name[0].toUpperCase()) || '?'}
 									</Avatar>

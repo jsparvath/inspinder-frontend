@@ -8,7 +8,7 @@ import green from '@material-ui/core/colors/green';
 const theme = createMuiTheme({
 	palette: {
 		// type: 'dark',
-		primary: { main: '#272727' },
+		primary: { main: '#272727', contrastText: '#fafafa' },
 		secondary: {
 			// main: '#faed26'
 			main: '#f4976c'
@@ -22,10 +22,16 @@ const theme = createMuiTheme({
 		useNextVariants: true
 	},
 	postList: {
-		masonryGap: 10
+		masonryGap: 10,
+		masonryItemWidth: 220
 	},
 	customColors: {
 		iconPrimary: '#fefefe'
+	},
+	post: {
+		iconButton: {
+			padding: '5px'
+		}
 	}
 });
 
