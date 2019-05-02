@@ -10,8 +10,9 @@ const theme = createMuiTheme({
 		// type: 'dark',
 		primary: { main: '#272727', contrastText: '#fafafa' },
 		secondary: {
+			main: '#F28F3B'
 			// main: '#faed26'
-			main: '#f4976c'
+			// main: '#f4976c'
 		},
 		bcSurface: {
 			main: '#fafafa',
