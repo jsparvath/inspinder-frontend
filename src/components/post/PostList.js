@@ -1,8 +1,8 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { withStyles } from "@material-ui/core/styles";
 import { Query } from "react-apollo";
 import { ACTIVE_TAGS_LQUERY } from "../../localState/localQueries";
 import { GET_POSTS_BY_TAGS_QUERY } from "../../queries/PostQueries";
+import LoadingSpinner from "../ui/LoadingSpinner";
 import Masonry from "./Masonry";
 import Post from "./Post";
 
@@ -15,23 +15,12 @@ const styles = theme => {
     let width = (i + 1) * theme.postList.masonryItemWidth;
     brakePoints.push(gap + width);
   }
-  return {
-    circularProgress: {
-      color: theme.palette.secondary.main
-    }
-  };
 };
 
 const PostList = ({ classes }) => (
   <Query query={ACTIVE_TAGS_LQUERY}>
     {({ data, loading }) => {
-      if (loading)
-        return (
-          <CircularProgress
-            className={classes.circularProgress}
-            color="secondary"
-          />
-        );
+      if (loading) return <LoadingSpinner />;
       const { tags } = data.activeTags;
       return (
         <Query
@@ -41,8 +30,7 @@ const PostList = ({ classes }) => (
         >
           {({ data, error, loading }) => {
             if (error) return <p>Error</p>;
-            if (loading)
-              return <CircularProgress className={classes.circularProgress} />;
+            if (loading) return <LoadingSpinner />;
             return (
               <Masonry brakePoints={brakePoints}>
                 {data.postsByTags.map(post => {
@@ -60,8 +48,6 @@ const PostList = ({ classes }) => (
                 })}
               </Masonry>
             );
-            // {/* This is post list
-            // <Post image="https://picsum.photos/200/300/?random" thumbnailType="img" /> */}
           }}
         </Query>
       );
