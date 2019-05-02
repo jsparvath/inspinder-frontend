@@ -45,6 +45,7 @@ const PostList = ({ classes }) => (
               return <CircularProgress className={classes.circularProgress} />;
             return (
               <Masonry brakePoints={brakePoints}>
+                {console.log(data)}
                 {data.postsByTags.map(post => {
                   return (
                     <Post
