@@ -33,19 +33,20 @@ const PostList = ({ classes }) => (
             if (loading) return <LoadingSpinner />;
             return (
               <Masonry brakePoints={brakePoints}>
-                {data.postsByTags.map(post => {
-                  return (
-                    <Post
-                      key={post.id}
-                      postId={post.id}
-                      image={post.image}
-                      title={post.title}
-                      link={post.link}
-                      description={post.description}
-                      thumbnailType="img"
-                    />
-                  );
-                })}
+                {data.postsByTags &&
+                  data.postsByTags.map(post => {
+                    return (
+                      <Post
+                        key={post.id}
+                        postId={post.id}
+                        image={post.image}
+                        title={post.title}
+                        link={post.link}
+                        description={post.description}
+                        thumbnailType="img"
+                      />
+                    );
+                  })}
               </Masonry>
             );
           }}

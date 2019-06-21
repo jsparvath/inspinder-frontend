@@ -93,7 +93,7 @@ function getSelectByTags({ path, classes }) {
 		return (
 			<Query query={GET_TAGS_QUERY}>
 				{({ data, error, loading }) => {
-					const tags = data.tags.map((tag) => ({ ...tag, label: tag.name, value: tag.name }));
+					const tags = data.tags? data.tags.map((tag) => ({ ...tag, label: tag.name, value: tag.name })): [];
 					return (
 						<div className={classes.selectField}>
 							<Select options={tags} />

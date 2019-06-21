@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "alias": ["inspinder.com"],
   "name": "Inspinder",
   "builds": [{ "src": "next.config.js", "use": "@now/next" }],
 
